@@ -3,7 +3,8 @@
         <mat-card-title>Registrar atividade</mat-card-title>
         <mat-card-content>
             <li *ngFor="let activity of activities$ | async">
-                <span>{{activity.id}} - {{activity.activity}}</span>
+                <span>{{activity.id}} - {{activity.activity}} - {{ activity.start | date:'short'}} - {{ activity.end |
+                    date:'short'}}</span>
             </li>
         </mat-card-content>
         <mat-card-actions>

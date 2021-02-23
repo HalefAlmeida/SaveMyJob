@@ -27,14 +27,16 @@ export class ActivitiesComponent implements OnInit {
     if (!this.activeNow) {
       this.activeNow = true
       this.actualActivity = {
-        id: 1,
-        activity: 'teste',
+        id: null,
+        activity: null,
         start: new Date,
         end: null
       }
     } else {
       this.activeNow = false
       this.actualActivity.end = new Date
+      this.actualActivity.activity = 'teste'
+      this.actualActivity.id = 1
       this.create(this.actualActivity)
     }
     console.log(this.actualActivity);
