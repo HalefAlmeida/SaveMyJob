@@ -15,10 +15,6 @@ export class ActivityFormComponent implements OnInit {
 
   activities$: Observable<Activities[]>
 
-  activeNow: boolean = false
-
-  actualActivity: Activities
-
   activityDescription: string = null
 
   // hasUnitNumber = false;
@@ -108,24 +104,16 @@ export class ActivityFormComponent implements OnInit {
     this.activities$ = this.activitiesService.read()
   }
 
-  onSubmit() {
-    if (!this.activeNow) {
-      this.activeNow = true
-      this.actualActivity = {
-        id: null,
-        activity: null,
-        start: new Date,
-        end: null
-      }
-    } else {
-      console.log(this.activityDescription);
+  get activeNow() {
+    return this.activitiesService.isActive
+  }
 
-      this.actualActivity.end = new Date
-      this.actualActivity.activity = this.activityForm.value['activity']
-      this.actualActivity.id = this.activitiesService.nextId()
-      this.create(this.actualActivity)
-      this.activeNow = false
-      this.actualActivity = null
+  onSubmit() {
+    if (!this.activitiesService.isActive) {
+      this.activitiesService.start();
+    } else {
+
+      this.activitiesService.finish(this.activityForm.value['activity'])
       this.activityForm.reset()
     }
   }
