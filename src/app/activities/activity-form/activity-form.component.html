@@ -1,11 +1,14 @@
 <form [formGroup]="activityForm" novalidate (ngSubmit)="onSubmit()">
   <mat-card class="activity-card">
     <mat-card-content>
-      <div class="row">
+      <div class="row" style="height: 100px;">
         <div class="col">
           <mat-form-field class="full-width" *ngIf="activeNow">
             <input matInput placeholder="Atividade" formControlName="activity">
+            <mat-error *ngIf="activityForm.get('activity').touched">{{ getErrorMessage('activity') }}
+            </mat-error>
           </mat-form-field>
+
         </div>
       </div>
       <!-- <div class="row">
@@ -91,16 +94,16 @@
       </div> -->
     </mat-card-content>
     <mat-card-actions>
-      <mat-card-actions>
+      <div style="display: flex; justify-content: center;">
         <button mat-fab class="button" *ngIf="!activeNow" type="submit">
           <mat-icon>add</mat-icon>
           Iniciar atividade
         </button>
-        <button mat-fab class="button" *ngIf="activeNow" color="warn" type="submit">
+        <button mat-fab class="button" [disabled]='activityForm.invalid' *ngIf="activeNow" color="warn" type="submit">
           <mat-icon>stop</mat-icon>
           Finalizar atividade
         </button>
-      </mat-card-actions>
+      </div>
     </mat-card-actions>
   </mat-card>
 </form>

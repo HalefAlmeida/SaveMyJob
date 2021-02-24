@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Activities, ActivitiesService } from 'src/app/shared/services/activities.service';
 
@@ -11,6 +11,8 @@ import { Activities, ActivitiesService } from 'src/app/shared/services/activitie
 })
 export class ActivityFormComponent implements OnInit {
 
+  activityForm: FormGroup
+
   activities$: Observable<Activities[]>
 
   activeNow: boolean = false
@@ -18,20 +20,6 @@ export class ActivityFormComponent implements OnInit {
   actualActivity: Activities
 
   activityDescription: string = null
-
-  activityForm = this.fb.group({
-    activity: null,
-    // firstName: [null, Validators.required],
-    // lastName: [null, Validators.required],
-    // address: [null, Validators.required],
-    // address2: null,
-    // city: [null, Validators.required],
-    // state: [null, Validators.required],
-    // postalCode: [null, Validators.compose([
-    //   Validators.required, Validators.minLength(5), Validators.maxLength(5)])
-    // ],
-    // shipping: ['free', Validators.required]
-  });
 
   // hasUnitNumber = false;
 
@@ -103,6 +91,20 @@ export class ActivityFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.activityForm = this.fb.group({
+      activity: [null, [Validators.required, Validators.minLength(10)]],
+      // firstName: [null, Validators.required],
+      // lastName: [null, Validators.required],
+      // address: [null, Validators.required],
+      // address2: null,
+      // city: [null, Validators.required],
+      // state: [null, Validators.required],
+      // postalCode: [null, Validators.compose([
+      //   Validators.required, Validators.minLength(5), Validators.maxLength(5)])
+      // ],
+      // shipping: ['free', Validators.required]
+    });
+
     this.activities$ = this.activitiesService.read()
   }
 
@@ -130,5 +132,13 @@ export class ActivityFormComponent implements OnInit {
 
   create(actualActivity: Activities) {
     this.activitiesService.create(actualActivity)
+  }
+
+  getErrorMessage(control) {
+    if (this.activityForm.get(control).hasError('minlength')) {
+      return 'O valor mínimo permitido é de 10 caracteres';
+    } else if (this.activityForm.get(control).hasError('required')) {
+      return 'Um valor deve ser informado para o campo';
+    }
   }
 }
