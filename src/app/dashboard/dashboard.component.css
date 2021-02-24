@@ -3,11 +3,16 @@
 }
 
 .dashboard-card {
-  position: absolute;
+  /* position: absolute;
   top: 15px;
   left: 15px;
   right: 15px;
-  bottom: 15px;
+  bottom: 15px; */
+  height: auto;
+}
+
+.inner-card {
+  margin: 10px;
 }
 
 .more-button {

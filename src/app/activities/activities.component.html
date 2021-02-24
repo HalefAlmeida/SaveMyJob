@@ -2,16 +2,7 @@
     <mat-card>
         <mat-card-title>Registrar atividade</mat-card-title>
         <mat-card-content>
-            <li *ngFor="let activity of activities$ | async">
-                <span>{{activity.id}} - {{activity.activity}} - {{ activity.start | date:'short'}} - {{ activity.end |
-                    date:'short'}}</span>
-            </li>
+            <app-activity-form></app-activity-form>
         </mat-card-content>
-        <mat-card-actions>
-            <button mat-fab class="add" (click)="onClick()">
-                <mat-icon>add</mat-icon>
-                Iniciar atividade
-            </button>
-        </mat-card-actions>
     </mat-card>
 </div>

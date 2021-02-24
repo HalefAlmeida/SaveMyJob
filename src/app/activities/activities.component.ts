@@ -7,43 +7,6 @@ import { Activities, ActivitiesService } from '../shared/shared/activities.servi
   templateUrl: './activities.component.html',
   styleUrls: ['./activities.component.css']
 })
-export class ActivitiesComponent implements OnInit {
-
-  activities$: Observable<Activities[]>
-
-  activeNow: boolean = false
-
-  actualActivity: Activities
-
-  constructor(
-    private activitiesService: ActivitiesService
-  ) { }
-
-  ngOnInit(): void {
-    this.activities$ = this.activitiesService.read()
-  }
-
-  onClick() {
-    if (!this.activeNow) {
-      this.activeNow = true
-      this.actualActivity = {
-        id: null,
-        activity: null,
-        start: new Date,
-        end: null
-      }
-    } else {
-      this.activeNow = false
-      this.actualActivity.end = new Date
-      this.actualActivity.activity = 'teste'
-      this.actualActivity.id = 1
-      this.create(this.actualActivity)
-    }
-    console.log(this.actualActivity);
-
-  }
-  create(actualActivity: Activities) {
-    this.activitiesService.create(actualActivity)
-  }
-
+export class ActivitiesComponent {
+  constructor() { }
 }

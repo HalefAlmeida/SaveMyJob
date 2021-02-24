@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-export interface Activities {
-  id: number,
-  activity: string,
-  start: Date,
-  end: Date
+export class Activities {
+  id: number;
+  activity: string;
+  start: Date;
+  end: Date;
 }
 
 @Injectable({
@@ -13,6 +13,12 @@ export interface Activities {
 })
 
 export class ActivitiesService {
+
+  lastID: number = 1;
+
+  nextId(): number {
+    return this.lastID++;
+  }
   create(activity: Activities) {
     this.activities.push(activity);
   }
