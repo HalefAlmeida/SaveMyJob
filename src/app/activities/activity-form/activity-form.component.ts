@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Activities, ActivitiesService } from 'src/app/shared/shared/activities.service';
+import { Activities, ActivitiesService } from 'src/app/shared/services/activities.service';
 
 
 @Component({
