@@ -9,6 +9,10 @@ const routes: Routes = [
     component: NavigationComponent,
     children: [
       {
+        path: 'login',
+        loadChildren: () => import('../login/login.module').then(m => m.LoginModule)
+      },
+      {
         path: 'dashboard',
         component: DashboardComponent
       },

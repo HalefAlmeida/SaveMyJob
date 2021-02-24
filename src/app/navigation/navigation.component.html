@@ -15,6 +15,11 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>SaveMyJob</span>
+      <div style="width: 100%;">
+        <button style="float: right;" [routerLink]="[ '/login' ]" mat-icon-button>
+          <mat-icon>login</mat-icon>
+        </button>
+      </div>
     </mat-toolbar>
     <router-outlet></router-outlet>
 
