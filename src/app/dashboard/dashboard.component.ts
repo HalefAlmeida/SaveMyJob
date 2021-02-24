@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { Activities, ActivitiesService } from '../shared/shared/activities.service';
+import { Activities, ActivitiesService } from '../shared/services/activities.service';
 import { Observable } from 'rxjs';
 
 @Component({
