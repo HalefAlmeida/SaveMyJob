@@ -1,8 +1,8 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false" *ngIf="isLogged">
     <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
+    <mat-nav-list *ngIf="isLogged">
       <a mat-list-item [routerLink]="[ '/dashboard' ]">Dashboard</a>
       <a mat-list-item [routerLink]="[ '/activities' ]">Registrar atividades</a>
       <!-- <a mat-list-item href="#">Link 3</a> -->
