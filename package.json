@@ -1,6 +1,6 @@
 {
   "name": "save-my-job",
-  "version": "0.0.0",
+  "version": "0.9.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
