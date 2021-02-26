@@ -30,7 +30,8 @@
                                 </div>
                             </div>
                             <div>
-                                <button mat-raised-button color="primary" type="submit">Fazer login</button>
+                                <button mat-raised-button class=".full-width " [disabled]='loginForm.invalid'
+                                    color="primary" type="submit">Fazer login</button>
                             </div>
                         </form>
                     </mat-card-content>

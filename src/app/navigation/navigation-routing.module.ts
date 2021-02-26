@@ -11,6 +11,9 @@ const routes: Routes = [
     children: [
       {
         path: 'login',
+        canActivate: [
+
+        ],
         loadChildren: () => import('../login/login.module').then(m => m.LoginModule),
       },
       {

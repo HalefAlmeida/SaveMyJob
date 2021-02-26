@@ -1,8 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false" *ngIf="isLogged">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport>
     <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list *ngIf="isLogged">
+    <mat-nav-list>
       <a mat-list-item [routerLink]="[ '/dashboard' ]">Dashboard</a>
       <a mat-list-item [routerLink]="[ '/activities' ]">Registrar atividades</a>
       <!-- <a mat-list-item href="#">Link 3</a> -->
@@ -10,14 +9,16 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      <button type="button" mat-icon-button *ngIf="logged" (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
       </button>
       <span>SaveMyJob</span>
       <div style="width: 100%;">
-        <button style="float: right;" [routerLink]="[ '/login' ]" mat-icon-button>
+        <button style="float: right;" *ngIf="!logged" [routerLink]="[ '/login' ]" mat-icon-button>
           <mat-icon>login</mat-icon>
+        </button>
+        <button style="float: right;" *ngIf="logged" (click)="logout" mat-icon-button>
+          <mat-icon>exit-to-app</mat-icon>
         </button>
       </div>
     </mat-toolbar>

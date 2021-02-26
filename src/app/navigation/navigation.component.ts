@@ -1,29 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '../shared/services/auth.service';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
+  logged: boolean
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
-    private auth: AuthService
+    public auth: AuthService
   ) { }
 
-  get isLogged() {
-    return this.auth.isLoggedIn
+  ngOnInit(): void {
+    this.auth.getUserData.subscribe(user => {
+      this.logged = !!user
+    })
+  }
+
+  logout() {
+    this.auth.logout()
   }
 
 }

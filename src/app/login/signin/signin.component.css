@@ -1,3 +1,7 @@
 .card {
     height: auto;
 }
+
+.full-width {
+    margin-bottom: 20px;
+}
