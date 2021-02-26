@@ -1,0 +1,24 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-card class="dashboard-card mat-elevation-z8">
+    <mat-card-header>
+      <mat-card-title>
+        Atividades realizadas
+      </mat-card-title>
+      <mat-card-subtitle>
+        Listagem de atividades registradas
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-card *ngFor="let item of activities$ | async" class="inner-card mat-elevation-z8">
+        #{{ item.id }}
+        <br>
+        Atividade: {{ item.activity }}
+        <br>
+        Início: {{ item.start | date:'short'}}
+        <br>
+        Término: {{ item.end | date:'short' }}
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
+</div>
