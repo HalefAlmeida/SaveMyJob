@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Activities, ActivitiesService } from 'src/app/shared/services/activities.service';
+import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class ActivityFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private activitiesService: ActivitiesService
+    private activitiesService: ActivitiesService,
+    public handler: ErrorHandlerService
   ) { }
 
   ngOnInit(): void {
@@ -49,14 +51,11 @@ export class ActivityFormComponent implements OnInit {
   }
 
   /**
-   * Retorna uma mensagem de erro com base no validador utilizado no controle do formulário reativo
-   * @param control Controle do formulário em que o erro deverá ser verificado
-   */
+     * Retorna uma mensagem de erro com base no validador utilizado no controle do formulário reativo
+     * @param control Controle do formulário em que o erro deverá ser verificado
+     */
   getErrorMessage(control) {
-    if (this.activityForm.get(control).hasError('minlength')) {
-      return 'O valor mínimo permitido é de 10 caracteres';
-    } else if (this.activityForm.get(control).hasError('required')) {
-      return 'Um valor deve ser informado para o campo';
-    }
+    this.handler.getErrorMessage(this.activityForm, control)
   }
+
 }

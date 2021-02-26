@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 export interface User {
   uid: string;
@@ -21,6 +22,8 @@ export class AuthService {
 
   //Armazena os dados do usuário logado através do fireauth. Nulo se não houver usuário logado;
   userAccount: User;
+
+  private userData = new BehaviorSubject<User>(undefined)
 
   // //Emite à aplicação o estado da autenticação de usuário
   // static USER_LOGGED = new EventEmitter<boolean>();
@@ -46,7 +49,7 @@ export class AuthService {
       .then((result) => {
         this.ngzone.run(() => {
           this.SetUserData(result.user);
-          this.router.navigate(['/feed']);
+          this.router.navigate(['/dashboard']);
         });
       }).catch(() => {
         console.error('Erro ao logar com provedor de e-mail.');
@@ -60,7 +63,7 @@ export class AuthService {
       .then((result) => {
         this.ngzone.run(() => {
           this.SetUserData(result.user);
-          this.router.navigate(['/feed']);
+          this.router.navigate(['/dashboard']);
         });
       }).catch(() => {
         console.error('Erro ao logar com provedor Google.');
@@ -68,16 +71,16 @@ export class AuthService {
 
   }
 
-  async logout() {
-    return this.afAuth.signOut().then(() => {
+  logout() {
+    this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
+      this.userAccount = null
     })
   }
 
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return user !== null;
+  get getUserData(): Observable<User> {
+    return this.userData.asObservable();
   }
 
   /* Setting up user data when sign in with username/password, 
@@ -92,6 +95,7 @@ export class AuthService {
       photoURL: user.photoURL,
       emailVerified: user.emailVerified
     }
+    this.userData.next(this.userAccount)
     return userRef.set(userData, {
       merge: true
     })
