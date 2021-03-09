@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "savemyjob-2017e"
+  },
+  "targets": {
+    "savemyjob-2017e": {
+      "hosting": {
+        "SaveMyJob": [
+          "savemyjob-2017e"
+        ]
+      }
+    }
   }
 }
