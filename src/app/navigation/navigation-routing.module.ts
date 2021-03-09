@@ -10,7 +10,7 @@ const routes: Routes = [
     component: NavigationComponent,
     children: [
       {
-        path: 'login',
+        path: '',
         canActivate: [
 
         ],
