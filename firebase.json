@@ -5,18 +5,12 @@
   },
   "hosting": [
     {
+      "target": "SaveMyJob",
       "public": "dist/SaveMyJob",
       "ignore": [
         "firebase.json",
         "**/.*",
         "**/node_modules/**"
-      ]
-    },
-    {
-      "target": "SaveMyJob",
-      "public": "dist/SaveMyJob",
-      "ignore": [
-        "**/.*"
       ],
       "headers": [
         {
